@@ -43,8 +43,8 @@
       <h2>The Calculator</h2>
       <form onsubmit="calculateMcNuggets(); return false;">
         <label for="units">Select Units:</label>
-        <select id="units" name="units">
-          <option value="lbs" selected onclick="updateDisplayUnits()">Pounds</option>
+        <select id="units" name="units" onChange="updateDisplayUnits()">
+          <option value="lbs" selected>Pounds</option>
           <option value="kgs">Kilograms</option>
         </select>
         <br>
