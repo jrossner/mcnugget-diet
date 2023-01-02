@@ -28,8 +28,17 @@
         <option value="kgs">Kgs</option>
       </select>
       <br>
+      <label for="tolose">How much weight do you want to lose?</label>
+      <input type="number" id="tolose" name="tolose" min="1" max="100" step="1" value="1">
+      <br>
+      <label for="basal">Average Calories burned a day:</label>
+      <input type="number" id="basal" name="basal" min="1000" max="10000" step="25" value="2000">
+      <br>
       <input type="submit" value="Submit">
     </form>
+  </p>
+  <p style="text-align:center;">
+    <div id="calcs"></div>
   </p>
   </body>
 </html>
