@@ -63,16 +63,18 @@
     <script>
       let unitDisplay = "pounds";
       if (document.getElementById("units").value == "kgs") {
-          unitDisplay == "kilograms"
+          unitDisplay = "kilograms"
       }
-      document.getElementById("unitText").innerHTML = unitDisplay;
+      document.getElementById("unitText").innerText = unitDisplay;
 
       function updateDisplayUnits() {
         if (document.getElementById("units").value == "kgs") {
-              unitDisplay == "kilograms"
+            unitDisplay = "kilograms";
+        } else {
+            unitDisplay = "pounds";
         }
 
-        document.getElementById("unitText").innerHTML = unitDisplay;
+        document.getElementById("unitText").innerText = unitDisplay;
       }
 
       function calculateMcNuggets() {
