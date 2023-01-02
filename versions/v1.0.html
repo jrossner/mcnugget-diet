@@ -1,6 +1,17 @@
 <!doctype HTML>
 <html>
   <head>
+    <style> 
+      input[type=submit] {
+      background-color: #04AA6D;
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-decoration: none;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+</style>
   </head>
   <body>
     <h1 style="text-align:center;">The McNuggets Diet Calculator</h1>
@@ -63,7 +74,7 @@
 
        if (numberOfNuggets < 0) {
          var needToBurn = Math.ceil(((calsToLose + (minNugs * calsPerNugget * days)) / days) + perDayLoss);
-         alert(`You cannot achieve this at your current average calorie burn-rate. While eating ${minNugs} McNuggets a day, you would have to burn ${needToBurn} calories a day.`);
+         alert(`You cannot achieve this at your current average calorie burn-rate. While eating ${minNugs} McNuggets a day, you would have to burn ${needToBurn} calories per day.`);
        } else {
          alert(`To achieve this, your diet would be ${numberOfNuggets} McNuggets per day.`);
        }
