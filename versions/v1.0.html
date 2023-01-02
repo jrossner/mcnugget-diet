@@ -48,7 +48,11 @@
      var diff = document.getElementById("tolose").value;
      var avgCal = document.getElementById("basal").value;
      
-     var calsToLose = diff * 3500;
+     if (units == "kgs") {
+       let calsToLose = diff * 2.205 * 3500;
+     else {
+       let calsToLose = diff * 3500;
+     }
      var perDayLoss = calsToLose / days;
      var perDayCals = avgCal - perDayLoss;
      
