@@ -42,23 +42,31 @@
   </p>
   <script>
    function calculateMcNuggets() {
-     const calsPerNugget = 170 / 4;
+     const calsPerNugget = Math.ceil(170 / 4);
+     const minNugs = 24;
+     
      var units = document.getElementById("units").value;
      var days = document.getElementById("days").value;
      var diff = document.getElementById("tolose").value;
      var avgCal = document.getElementById("basal").value;
      
+     let calsToLose;
      if (units == "kgs") {
-       let calsToLose = diff * 2.205 * 3500;
-     else {
-       let calsToLose = diff * 3500;
+       calsToLose = diff * 2.205 * 3500;
+     } else {
+       calsToLose = diff * 3500;
      }
      var perDayLoss = calsToLose / days;
      var perDayCals = avgCal - perDayLoss;
      
      var numberOfNuggets = Math.floor(perDayCals / calsPerNugget);
      
-     alert(`To achieve this, your diet would be ${numberOfNuggets} McNuggets per day.`)
+     if (numberOfNuggets < 0) {
+       var needToBurn = Math.ceil(((calsToLose + (minNugs * calsPerNugget * days)) / days) + perDayLoss);
+       alert(`You cannot achieve this at your current average calorie burn-rate. While eating ${minNugs} McNuggets a day, you would have to burn ${needToBurn} calories a day.`);
+     } else {
+       alert(`To achieve this, your diet would be ${numberOfNuggets} McNuggets per day.`);
+     }
    }
   </script>
   </body>
