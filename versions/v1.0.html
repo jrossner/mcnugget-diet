@@ -21,7 +21,7 @@
     </p>
   <p style="text-align:center;">
     <h2>The Calculator</h2>
-    <form>
+    <form onclick="calculateMcNuggets()">
       <label for="units">Select Units:</label>
       <select id="units" name="units">
         <option value="lbs" selected>Lbs</option>
@@ -31,14 +31,31 @@
       <label for="tolose">How much weight do you want to lose?</label>
       <input type="number" id="tolose" name="tolose" min="1" max="100" step="1" value="1">
       <br>
+      <label for="days">How many days do you want to take to accomplish this?</label>
+      <input type="number" id="days" name="days" min="14" max="730" step="7" value="90">
+      <br>
       <label for="basal">Average Calories burned a day:</label>
       <input type="number" id="basal" name="basal" min="1000" max="10000" step="25" value="2000">
       <br>
       <input type="submit" value="Submit">
     </form>
   </p>
-  <p style="text-align:center;">
-    <div id="calcs"></div>
-  </p>
+  <script>
+   function calculateMcNuggets() {
+     const calsPerNugget = 170 / 4;
+     var units = document.getElementById("units").value;
+     var days = document.getElementById("days").value;
+     var diff = document.getElementById("tolose").value;
+     var avgCal = document.getElementById("basal").value;
+     
+     var calsToLose = diff * 3500;
+     var perDayLoss = calsToLose / days;
+     var perDayCals = avgCal - perDayLoss;
+     
+     var numberOfNuggets = Math.floor(perDayCals / calsPerNugget);
+     
+     alert(`To achieve this, your diet would be ${numberOfNuggets} McNuggets per day.`)
+   }
+  </script>
   </body>
 </html>
