@@ -21,7 +21,7 @@
     </p>
   <p style="text-align:center;">
     <h2>The Calculator</h2>
-    <form onclick="calculateMcNuggets()">
+    <form onsubmit="calculateMcNuggets()">
       <label for="units">Select Units:</label>
       <select id="units" name="units">
         <option value="lbs" selected>Lbs</option>
@@ -29,13 +29,13 @@
       </select>
       <br>
       <label for="tolose">How much weight do you want to lose?</label>
-      <input type="number" id="tolose" name="tolose" min="1" max="100" step="1" value="1">
+      <input type="number" id="tolose" name="tolose" min="1" max="200" step="1" value="10">
       <br>
       <label for="days">How many days do you want to take to accomplish this?</label>
-      <input type="number" id="days" name="days" min="14" max="730" step="7" value="90">
+      <input type="number" id="days" name="days" min="1" max="730" step="1" value="90">
       <br>
       <label for="basal">Average Calories burned a day:</label>
-      <input type="number" id="basal" name="basal" min="1000" max="10000" step="25" value="2000">
+      <input type="number" id="basal" name="basal" min="1000" max="10000" step="1" value="2000">
       <br>
       <input type="submit" value="Submit">
     </form>
