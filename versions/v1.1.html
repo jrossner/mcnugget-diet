@@ -1,0 +1,84 @@
+<!doctype HTML>
+<html>
+  <head>
+    <style> 
+      input[type=submit] {
+      background-color: #04AA6D;
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-decoration: none;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+</style>
+  </head>
+  <body>
+    <h1 style="text-align:center;">The McNuggets Diet Calculator</h1>
+    <p>
+      <h2>About</h2>
+      McDonalds is a widely accessible food source for many countries, and has a reputation for being a cost-effective option for hungry people needing calories.
+      The McNuggets are McDonalds' Chicken Nuggets, and all nutritional info is sourced from <a href="https://www.mcdonalds.com/us/en-us/about-our-food/nutrition-calculator.html">McDonalds</a>.
+      
+      <br>
+      <br>
+      <b>PLEASE READ!</b>
+      <ul>
+        <li>You should <b>NOT</b> take this page as medical advice. Consult a medical professional for advice on your diet and health.</li>
+        <li>Every diet should include many nutrients not found in chicken nuggets.</li>
+        <li>This page is <b>NOT</b> an endorsement of McDonalds or their products.</li>
+        <li>This is page is for discussion and curiosity purposes.</li>
+      </ul>
+    </p>
+    <p>
+      <h2>The Calculator</h2>
+      <form onsubmit="calculateMcNuggets(); return false;">
+        <label for="units">Select Units:</label>
+        <select id="units" name="units">
+          <option value="lbs" selected>Lbs</option>
+          <option value="kgs">Kgs</option>
+        </select>
+        <br>
+        <label for="tolose">How much weight do you want to lose?</label>
+        <input type="number" id="tolose" name="tolose" min="1" max="200" step="1" value="10">
+        <br>
+        <label for="days">How many days do you want to take to accomplish this?</label>
+        <input type="number" id="days" name="days" min="1" max="730" step="1" value="90">
+        <br>
+        <label for="basal">Average Calories burned per day:</label>
+        <input type="number" id="basal" name="basal" min="1000" max="10000" step="10" value="2000">
+        <br>
+        <input type="submit" value="Calculate My Diet!">
+      </form>
+    </p>
+    <script>
+     function calculateMcNuggets() {
+       const calsPerNugget = Math.ceil(170 / 4);
+       const minNugs = 24;
+
+       var units = document.getElementById("units").value;
+       var days = document.getElementById("days").value;
+       var diff = document.getElementById("tolose").value;
+       var avgCal = document.getElementById("basal").value;
+
+       let calsToLose;
+       if (units == "kgs") {
+         calsToLose = diff * 2.205 * 3500;
+       } else {
+         calsToLose = diff * 3500;
+       }
+       var perDayLoss = calsToLose / days;
+       var perDayCals = avgCal - perDayLoss;
+
+       var numberOfNuggets = Math.floor(perDayCals / calsPerNugget);
+
+       if (numberOfNuggets < 0) {
+         var needToBurn = Math.ceil(((calsToLose + (minNugs * calsPerNugget * days)) / days) + perDayLoss);
+         alert(`You cannot achieve this at your current average calorie burn-rate. While eating ${minNugs} McNuggets a day, you would have to burn ${needToBurn} calories per day.`);
+       } else {
+         alert(`To achieve this, your diet would be ${numberOfNuggets} McNuggets per day.`);
+       }
+     }
+    </script>
+  </body>
+</html>
