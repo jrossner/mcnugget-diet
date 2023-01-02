@@ -44,11 +44,11 @@
       <form onsubmit="calculateMcNuggets(); return false;">
         <label for="units">Select Units:</label>
         <select id="units" name="units">
-          <option value="lbs" selected>Pounds</option>
+          <option value="lbs" selected onclick="updateDisplayUnits()">Pounds</option>
           <option value="kgs">Kilograms</option>
         </select>
         <br>
-        <label for="tolose">How much weight do you want to lose?</label>
+        <label for="tolose">How many <a id="unitText"></a> do you want to lose?</label>
         <input type="number" id="tolose" name="tolose" min="1" max="200" step="1" value="10">
         <br>
         <label for="days">In how many days?</label>
@@ -61,33 +61,49 @@
       </form>
     </p>
     <script>
-     function calculateMcNuggets() {
-       const calsPerNugget = Math.ceil(170 / 4);
-       const minNugs = 24;
+      let unitDisplay = "pounds";
+      if (document.getElementById("units").value == "kgs") {
+          unitDisplay = "kilograms"
+      }
+      document.getElementById("unitText").innerText = unitDisplay;
 
-       var units = document.getElementById("units").value;
-       var days = document.getElementById("days").value;
-       var diff = document.getElementById("tolose").value;
-       var avgCal = document.getElementById("basal").value;
+      function updateDisplayUnits() {
+        if (document.getElementById("units").value == "kgs") {
+            unitDisplay = "kilograms";
+        } else {
+            unitDisplay = "pounds";
+        }
 
-       let calsToLose;
-       if (units == "kgs") {
-         calsToLose = diff * 2.205 * 3500;
-       } else {
-         calsToLose = diff * 3500;
-       }
-       var perDayLoss = calsToLose / days;
-       var perDayCals = avgCal - perDayLoss;
+        document.getElementById("unitText").innerText = unitDisplay;
+      }
 
-       var numberOfNuggets = Math.floor(perDayCals / calsPerNugget);
+      function calculateMcNuggets() {
+        const calsPerNugget = Math.ceil(170 / 4);
+        const minNugs = 24;
 
-       if (numberOfNuggets < 0) {
-         var needToBurn = Math.ceil(((calsToLose + (minNugs * calsPerNugget * days)) / days) + perDayLoss);
-         alert(`You cannot achieve this at your current average calorie burn-rate. While eating ${minNugs} McNuggets a day, you would have to burn ${needToBurn} calories per day.`);
-       } else {
-         alert(`To achieve this, your diet would be ${numberOfNuggets} McNuggets per day.`);
-       }
-     }
+        var units = document.getElementById("units").value;
+        var days = document.getElementById("days").value;
+        var diff = document.getElementById("tolose").value;
+        var avgCal = document.getElementById("basal").value;
+
+        let calsToLose;
+        if (units == "kgs") {
+          calsToLose = diff * 2.205 * 3500;
+        } else {
+          calsToLose = diff * 3500;
+        }
+        var perDayLoss = calsToLose / days;
+        var perDayCals = avgCal - perDayLoss;
+
+        var numberOfNuggets = Math.floor(perDayCals / calsPerNugget);
+
+        if (numberOfNuggets < 0) {
+          var needToBurn = Math.ceil(((calsToLose + (minNugs * calsPerNugget * days)) / days) + perDayLoss);
+          alert(`You cannot achieve this at your current average calorie burn-rate. While eating ${minNugs} McNuggets a day, you would have to burn ${needToBurn} calories per day.`);
+        } else {
+          alert(`To achieve this, your diet would be ${numberOfNuggets} McNuggets per day.`);
+        }
+      }
     </script>
   </body>
 </html>
